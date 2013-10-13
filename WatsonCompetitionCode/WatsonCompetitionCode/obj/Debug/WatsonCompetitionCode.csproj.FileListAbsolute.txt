@@ -4,3 +4,9 @@ C:\Users\Logan\SkyDrive\School\Senior\Fall\CSSE413\Watson Competition\Workspace\
 C:\Users\Logan\SkyDrive\School\Senior\Fall\CSSE413\Watson Competition\Workspace\WatsonCompetitionCode\WatsonCompetitionCode\bin\Debug\WatsonCompetitionCode.pdb
 C:\Users\Logan\SkyDrive\School\Senior\Fall\CSSE413\Watson Competition\Workspace\WatsonCompetitionCode\WatsonCompetitionCode\obj\Debug\WatsonCompetitionCode.exe
 C:\Users\Logan\SkyDrive\School\Senior\Fall\CSSE413\Watson Competition\Workspace\WatsonCompetitionCode\WatsonCompetitionCode\obj\Debug\WatsonCompetitionCode.pdb
+C:\Users\Logan\SkyDrive\School\Senior\Fall\CSSE413\Watson_Competition\AIProject\WatsonCompetitionCode\WatsonCompetitionCode\bin\Debug\WatsonCompetitionCode.exe.config
+C:\Users\Logan\SkyDrive\School\Senior\Fall\CSSE413\Watson_Competition\AIProject\WatsonCompetitionCode\WatsonCompetitionCode\obj\Debug\WatsonCompetitionCode.exe
+C:\Users\Logan\SkyDrive\School\Senior\Fall\CSSE413\Watson_Competition\AIProject\WatsonCompetitionCode\WatsonCompetitionCode\obj\Debug\WatsonCompetitionCode.pdb
+C:\Users\Logan\SkyDrive\School\Senior\Fall\CSSE413\Watson_Competition\AIProject\WatsonCompetitionCode\WatsonCompetitionCode\bin\Debug\WatsonCompetitionCode.exe
+C:\Users\Logan\SkyDrive\School\Senior\Fall\CSSE413\Watson_Competition\AIProject\WatsonCompetitionCode\WatsonCompetitionCode\bin\Debug\WatsonCompetitionCode.pdb
+C:\Users\Logan\SkyDrive\School\Senior\Fall\CSSE413\Watson_Competition\AIProject\WatsonCompetitionCode\WatsonCompetitionCode\obj\Debug\WatsonCompetitionCode.csprojResolveAssemblyReference.cache

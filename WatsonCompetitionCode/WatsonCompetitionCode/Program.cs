@@ -12,8 +12,8 @@ namespace WatsonCompetitionCode
         static void Main(string[] args)
         {
             Util utility = new Util();
-            Dictionary<int, Canidate> dict = utility.csvReader("C:\\Users\\Logan\\SkyDrive\\School\\Senior\\Fall\\CSSE413\\Watson Competition\\Workspace\\WatsonCompetitionCode\\WatsonCompetitionCode\\TGMC training-sample.csv");
-            utility.fileWriter(dict,"C:\\Users\\Logan\\SkyDrive\\School\\Senior\\Fall\\CSSE413\\Watson Competition\\Workspace\\WatsonCompetitionCode\\WatsonCompetitionCode\\test.txt");
+            Dictionary<int, Canidate> dict = utility.csvReader("TGMC training-sample.csv");
+            utility.fileWriter(dict,"test.txt");
         }
 
        
@@ -79,6 +79,43 @@ namespace WatsonCompetitionCode
                 i++;
             }
             writer.Close();
+        }
+        public void removeExtraneouData(Dictionary<int, Canidate> canidates)
+        {
+            List<List<float>> columns = new List<List<float>>();
+            int columnCount = canidates.Values.First().featuresRating.Count();
+            for (int k = 0; k < columnCount; k++)
+            {
+                columns.Add(new List<float>());
+            }
+            foreach (KeyValuePair<int, Canidate> pair in canidates)
+            {
+                Canidate c = pair.Value;
+                int length = c.featuresRating.Count;
+                for (int i = 0; i < length; i++)
+                {
+                    columns[i].Add(c.featuresRating[i]);
+                }
+            }
+            List<int> removeIndex = new List<int>();
+            
+            for (int k = 0; k < columnCount-1;k++)
+            {
+                for (int i = k + 1; i < columnCount; i++)
+                {
+                    if (columns[k].Sum() == columns[i].Sum())
+                    {
+                        for (int j = 0; j < columns[k].Count; j++)
+                        {
+                            if (columns[k][j] != columns[i][j])
+                            {
+                                removeIndex.Insert(0, i);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
