@@ -14,6 +14,7 @@ namespace WatsonCompetitionCode
             Util utility = new Util();
             Dictionary<int, Canidate> dict = utility.csvReader("TGMC training-sample.csv");
             utility.fileWriter(dict,"test.txt");
+            utility.removeExtraneouData(dict);
         }
 
        
@@ -51,9 +52,9 @@ namespace WatsonCompetitionCode
                 canidate.questionNumber = Convert.ToSingle(values[1]);
                 for (int i = 2; i < values.Count(); i++)
                 {
-                    if (values[i] == "true" || values[i] == "false")
+                    if (values[i] == "true" || values[i] == "false" || values[i] == "TRUE" || values[i] == "FALSE")
                     {
-                        if (values[i] == "true") canidate.isTrue = true;
+                        if (values[i] == "true" || values[i] == "TRUE") canidate.isTrue = true;
                         else canidate.isTrue = false;
                         canidate.givenAnswer = true;
                         break;
@@ -82,12 +83,15 @@ namespace WatsonCompetitionCode
         }
         public void removeExtraneouData(Dictionary<int, Canidate> canidates)
         {
+            //intialize size of array of columns
             List<List<float>> columns = new List<List<float>>();
             int columnCount = canidates.Values.First().featuresRating.Count();
             for (int k = 0; k < columnCount; k++)
             {
                 columns.Add(new List<float>());
             }
+
+            //Generate Array of Columns
             foreach (KeyValuePair<int, Canidate> pair in canidates)
             {
                 Canidate c = pair.Value;
@@ -97,25 +101,61 @@ namespace WatsonCompetitionCode
                     columns[i].Add(c.featuresRating[i]);
                 }
             }
-            List<int> removeIndex = new List<int>();
-            
+
+            //Add columns to remove that contain same data
+            List<int> removeData = new List<int>();
             for (int k = 0; k < columnCount-1;k++)
             {
                 for (int i = k + 1; i < columnCount; i++)
                 {
                     if (columns[k].Sum() == columns[i].Sum())
                     {
+                        bool isRemove = true;
                         for (int j = 0; j < columns[k].Count; j++)
                         {
                             if (columns[k][j] != columns[i][j])
                             {
-                                removeIndex.Insert(0, i);
+                                isRemove = false;
                                 break;
                             }
+                        }
+                        if (isRemove && !removeData.Contains(i))
+                        {
+                            removeData.Add(i);
                         }
                     }
                 }
             }
+            //Add columns that have all same values (without doubling up on previous addition)
+            for (int k = 0; k < columns.Count; k++)
+            {
+                float firstElement = columns[k][0];
+                bool isRemove = true;
+                foreach (float feature in columns[k])
+                {
+                    if (firstElement != feature)
+                    {
+                        isRemove = false;
+                        break;
+                    }
+                }
+                if (isRemove && !removeData.Contains(k))
+                {
+                    removeData.Add(k);
+                }
+            }
+            for (int k = removeData.Count - 1; k > 0; k--)
+            {
+                foreach (KeyValuePair<int, Canidate> pair in canidates)
+                {
+                    pair.Value.featuresRating.RemoveAt(removeData.Max());
+                    removeData.Remove(removeData.Max());
+                }
+                Console.WriteLine("Removed Column " + removeData[k]);
+            }
+            
+            Console.ReadLine();
+            
         }
     }
 }
