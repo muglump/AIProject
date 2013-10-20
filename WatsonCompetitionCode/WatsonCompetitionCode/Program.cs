@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Accord.MachineLearning;
+
 
 namespace WatsonCompetitionCode
 {
@@ -15,6 +15,7 @@ namespace WatsonCompetitionCode
             Util utility = new Util();
             Dictionary<int, Canidate> dict = utility.csvReader("TGMC training-sample.csv");
             utility.fileWriter(dict,"test.txt");
+            //Decision Trees need to be before this preprocessor.
             utility.removeExtraneouData(dict);
         }
 
