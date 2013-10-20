@@ -17,6 +17,7 @@ namespace WatsonCompetitionCode
             utility.fileWriter(dict,"test.txt");
             //Decision Trees need to be before this preprocessor.
             utility.removeExtraneouData(dict);
+            Console.ReadLine();
         }
 
        
@@ -83,7 +84,7 @@ namespace WatsonCompetitionCode
             }
             writer.Close();
         }
-        public void removeExtraneouData(Dictionary<int, Canidate> canidates)
+        public List<int> removeExtraneouData(Dictionary<int, Canidate> canidates)
         {
             //intialize size of array of columns
             List<List<float>> columns = new List<List<float>>();
@@ -146,18 +147,20 @@ namespace WatsonCompetitionCode
                     removeData.Add(k);
                 }
             }
-            for (int k = removeData.Count - 1; k > 0; k--)
+
+            List<int> result = removeData.ToList();
+
+            while (removeData.Count >0)
             {
                 foreach (KeyValuePair<int, Canidate> pair in canidates)
                 {
                     pair.Value.featuresRating.RemoveAt(removeData.Max());
-                    removeData.Remove(removeData.Max());
                 }
-                Console.WriteLine("Removed Column " + removeData[k]);
+                Console.WriteLine("Removed Column " + removeData.Max());
+                removeData.Remove(removeData.Max());
             }
             
-            Console.ReadLine();
-            
+            return result;
         }
     }
 }
