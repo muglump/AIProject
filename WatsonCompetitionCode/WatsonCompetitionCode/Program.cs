@@ -17,7 +17,7 @@ namespace WatsonCompetitionCode
             utility.fileWriter(dict,"test.txt");
             //Decision Trees need to be before this preprocessor.
             utility.removeExtraneouData(dict);
-            Console.ReadLine();
+            //Console.ReadLine();
         }
 
        
@@ -156,10 +156,27 @@ namespace WatsonCompetitionCode
                 {
                     pair.Value.featuresRating.RemoveAt(removeData.Max());
                 }
-                Console.WriteLine("Removed Column " + removeData.Max());
+                columns.RemoveAt(removeData.Max());
+                //Console.WriteLine("Removed Column " + removeData.Max());
                 removeData.Remove(removeData.Max());
             }
-            
+            List<float> maxValues = new List<float>();
+            foreach (List<float> column in columns)
+            {
+                float absMax;
+                if (Math.Abs(column.Min()) > Math.Abs(column.Max())) absMax = Math.Abs(column.Min());
+                else absMax = Math.Abs(column.Max());
+                if (absMax == 0.0) absMax = (float) 1.0;
+                maxValues.Add(absMax);
+            }
+
+            for (int k = 0; k < maxValues.Count; k++)
+            {
+                foreach (KeyValuePair<int, Canidate> canidate in canidates)
+                {
+                    canidate.Value.featuresRating[k] = (canidate.Value.featuresRating[k] / maxValues[k]);
+                }
+            }
             return result;
         }
     }
